@@ -1,0 +1,49 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Поиск
+{% endblock title %}
+{% block content %}
+    <h1>Поиск</h1>
+    <hr>
+    <form method='GET'>
+        {{filter.form}}
+        <input type="submit" value='Найти'>
+    </form>
+    
+        <table style='margin: auto' border='2'>
+            <tr>
+                <td>Заголовок</td>
+                <td>Дата публикации</td>
+                <td>Содержание</td>
+            </tr>
+        {% for post in filter.qs %}
+            <tr>
+                <td>{{post.postTitle|censor}}</td>
+                <td>{{post.dateCreation|date:'d M Y'}}</td>
+                <td>{{post.postText|truncatechars:50|censor}}</td>
+            </tr>       
+        {% endfor %}
+        </table>
+    
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{page_obj.previous_page_number}}"><<<</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a>{{num}}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                <a href="?page={{num}}">{{num}}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">>>></a>
+            <a href="?page={{page_obj.paginator.num_pages}}">Last</a>
+        {% endif %}
+    
+    {% endif %}
+{% endblock content %}
+

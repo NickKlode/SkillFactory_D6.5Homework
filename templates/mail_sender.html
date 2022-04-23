@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Недельная рассылка </title>
+</head>
+<body>
+    <h1> Здравствуйте, {{ user }}, список новых статей за неделю! </h1>
+    <hr>
+    {% for post in text %}
+        <a href="http://127.0.0.1:8000/news/{{post.id}}">{{post.postTitle}}</a>
+    {% endfor %}
+    <br>
+</body>
+</html>

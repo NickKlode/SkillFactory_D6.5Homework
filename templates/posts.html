@@ -1,0 +1,58 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Новостной портал
+{% endblock title %}
+{% block content %}
+    <h1>Все новости</h1>
+    <h3>{{time_now|date:'d M Y'}}</h3>
+    <br>
+    <h3>Всего постов - {{posts|length}}</h3>
+    <br>
+    <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
+    {% if is_not_authors %}
+        <button><a href="/sign/upgrade/">Стать Автором</a></button>
+    {% endif %}
+    {% if posts %}
+        <table style='margin: auto' border='2'>
+            <tr>
+                <td>Заголовок</td>
+                <td>Дата публикации</td>
+                <td>Содержание</td>
+            </tr>
+        {% for post in posts %}
+            <tr>
+                <td>
+                    <a href="/news/{{post.id}}">{{post.postTitle|censor}}</a>
+                    <a href="/news/{{post.id}}/update">Редактировать</a>
+                    <a href="/news/{{post.id}}/delete">Удалить</a>
+                </td>
+                <td>{{post.dateCreation|date:'d M Y'}}</td>
+                <td>{{post.postText|truncatechars:50|censor}}</td>
+            </tr>       
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{page_obj.previous_page_number}}"><<<</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a>{{num}}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                <a href="?page={{num}}">{{num}}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">>>></a>
+            <a href="?page={{page_obj.paginator.num_pages}}">Last</a>
+        {% endif %}
+    
+    {% endif %}
+{% endblock content %}
+

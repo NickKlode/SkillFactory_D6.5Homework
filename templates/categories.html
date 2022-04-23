@@ -1,0 +1,12 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    {% for category in categories %}
+        <a href="/news/categories/{{category.id}}">{{category.nameCategory}}</a>
+        <br>
+    {% endfor %}
+
+{% endblock content %}
+
+

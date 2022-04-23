@@ -1,0 +1,11 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}Пост{% endblock title %}
+
+{% block content %}
+<h1>{{post.postTitle|censor}}</h1>
+<h3>{{post.dateCreation|date:"d M Y, H:m"}}</h3>
+<h3>{{post.postText|censor}}</h3>
+
+{% endblock content %}

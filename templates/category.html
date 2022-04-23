@@ -1,0 +1,26 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    <h1>{{category.categotyThrough.nameCategory}}</h1>
+    {% for post in catposts %}
+        <a href="/news/{{post.id}}">{{post.postTitle}}</a>
+    {% endfor %}
+    {% if not is_subscribed %}
+        <br>
+        <button><a href="{% url 'subscribe' category.id %}">Подписаться</a></button>
+    {% else %}
+        <br>
+        <button><a href="{% url 'subscribe' category.id %}">Отписаться</a></button>
+    {% endif %}
+
+    
+    
+
+    <h1>Подписчики:</h1>
+    {% for sub in subs_list %}
+        {{sub}}
+    {% endfor %}
+    
+    
+{% endblock content %}

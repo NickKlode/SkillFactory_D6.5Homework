@@ -7,6 +7,7 @@ from .filters import PostFilter
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 
 class NewsList(ListView):
     model = Post
@@ -14,6 +15,8 @@ class NewsList(ListView):
     context_object_name = 'posts'
     queryset = Post.objects.order_by('-dateCreation')
     paginate_by = 10
+    
+    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,6 +33,13 @@ class NewsDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+    
+    def get_object(self, *args, **kwargs):
+        obj=cache.get(f"Post-{self.kwargs['pk']}", None)
+        if not obj:
+            obj = super().get_object(*args, **kwargs)
+            cache.set(f"Post-{self.kwargs['pk']}", obj)
+        return obj
     
 class Search(LoginRequiredMixin,ListView):
     model = Post
@@ -94,3 +104,4 @@ def add_subscriber(request, pk):
         category.subscribers.remove(user)
     
     return redirect(f'/news/categories/{pk}')
+

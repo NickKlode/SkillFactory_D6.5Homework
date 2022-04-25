@@ -1,0 +1,16 @@
+2022-04-25 16:13:37,947 ERROR Internal Server Error: /news/categories/5 C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\utils\log.py
+Traceback (most recent call last):
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\template\backends\django.py", line 58, in render
+    context = make_context(
+  File "C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\template\context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than HttpResponse.
+2022-04-25 16:13:39,027 ERROR "GET /news/categories/5 HTTP/1.1" 500 145 C:\SkillFactory\Povtor\Python\djangorepeatHW\venv\lib\site-packages\django\core\servers\basehttp.py

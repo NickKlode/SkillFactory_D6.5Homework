@@ -1,0 +1,6 @@
+2022-04-25 16:08:57,631 INFO autoreload Watching for file changes with StatReloader
+2022-04-25 16:13:29,883 INFO autoreload Watching for file changes with StatReloader
+2022-04-25 16:14:25,571 INFO autoreload C:\SkillFactory\Povtor\Python\djangorepeatHW\NewsPaper\news\views.py changed, reloading.
+2022-04-25 16:14:26,599 INFO autoreload Watching for file changes with StatReloader
+2022-04-25 16:14:31,671 INFO autoreload C:\SkillFactory\Povtor\Python\djangorepeatHW\NewsPaper\NewsPaper\settings.py changed, reloading.
+2022-04-25 16:14:32,616 INFO autoreload Watching for file changes with StatReloader
